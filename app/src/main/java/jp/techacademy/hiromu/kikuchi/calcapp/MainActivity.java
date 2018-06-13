@@ -2,11 +2,15 @@ package jp.techacademy.hiromu.kikuchi.calcapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
 import android.content.Intent;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,17 +22,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
 
         Button button1 = (Button) findViewById(R.id.button1);
-        button.setOnClickListener(this);
+        button1.setOnClickListener(this);
 
         Button button2 = (Button) findViewById(R.id.button2);
-        button.setOnClickListener(this);
+        button2.setOnClickListener(this);
 
         Button button3 = (Button) findViewById(R.id.button3);
-        button.setOnClickListener(this);
+        button3.setOnClickListener(this);
 
 
         mEditText = (EditText) findViewById(R.id.EditText);
@@ -37,19 +42,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     @Override
     public void onClick(View v) {
 
 
+        String str1 = mEditText.getText().toString();
+        int num1 = Integer.parseInt(str1);
 
-        String str = mEditText.getText().toString();
-        int num1 = Integer.parseInt(str);
+        String str2 = mEditText1.getText().toString();
+        int num2 = Integer.parseInt(str2);
 
-        String st = mEditText1.getText().toString();
-        int num2 = Integer.parseInt(st);
-
-        Intent intent = new Intent(this,CalcApp2.class);
+        Intent intent = new Intent(this, CalcApp2.class);
 
         if (v.getId() == R.id.button) {
             int result = num1 + num2;
@@ -71,9 +74,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("button3", result);
             startActivity(intent);
 
+            if(str1.equals("")){
+                Toast.makeText(this, "数値が入力されていません。", Toast.LENGTH_SHORT).show();
+            } else if(str2.equals("")) {
+                Toast.makeText(this, "数値が入力されていません", Toast.LENGTH_SHORT).show();
+            }
+
         }
+
+
+
+
+
+
+
     }
-
-
 
 }
