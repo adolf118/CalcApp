@@ -45,49 +45,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-
         String str1 = mEditText.getText().toString();
-        int num1 = Integer.parseInt(str1);
-
         String str2 = mEditText1.getText().toString();
-        int num2 = Integer.parseInt(str2);
+
+        if(str1.equals("")){
+            Toast.makeText(this, "数値が入力されていません。", Toast.LENGTH_SHORT).show(); {
+                return;
+            }
+
+        } else if(str2.equals("")) {
+            Toast.makeText(this, "数値が入力されていません。", Toast.LENGTH_SHORT).show(); {
+                return;
+            }
+        }
+
+
+        double num1 = 0.0;
+        double num2 = 0.0;
+
+        try {
+            num1 = Double.parseDouble(str1);
+            num2 = Double.parseDouble(str2);
+        }
+        catch (Exception e) {
+            Toast.makeText(this, "数値を入力してください。", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 
         Intent intent = new Intent(this, CalcApp2.class);
 
+
+
         if (v.getId() == R.id.button) {
-            int result = num1 + num2;
+            double result = num1 + num2;
             intent.putExtra("button", result);
             startActivity(intent);
 
         } else if (v.getId() == R.id.button1) {
-            int result = num1 - num2;
+            double result = num1 - num2;
             intent.putExtra("button1", result);
             startActivity(intent);
 
         } else if (v.getId() == R.id.button2) {
-            int result = num1 * num2;
+            double result = num1 * num2;
             intent.putExtra("button2", result);
             startActivity(intent);
 
         } else if (v.getId() == R.id.button3) {
-            int result = num1 / num2;
-            intent.putExtra("button3", result);
-            startActivity(intent);
-
-            if(str1.equals("")){
-                Toast.makeText(this, "数値が入力されていません。", Toast.LENGTH_SHORT).show();
-            } else if(str2.equals("")) {
-                Toast.makeText(this, "数値が入力されていません", Toast.LENGTH_SHORT).show();
+            if (num2 == 0.0) {
+                Toast.makeText(this, "ゼロで割り算することはできません。", Toast.LENGTH_SHORT).show();
+                return;
             }
 
+            {
+                double result = num1 / num2;
+                intent.putExtra("button3", result);
+                startActivity(intent);
+            }
+
+
         }
-
-
-
-
-
-
-
     }
 
 }
