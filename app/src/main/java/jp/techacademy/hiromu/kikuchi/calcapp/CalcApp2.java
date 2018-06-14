@@ -13,9 +13,9 @@ public class CalcApp2 extends AppCompatActivity {
         setContentView(R.layout.activity_calc_app2);
 
         Intent intent = getIntent();
-        int button = intent.getIntExtra("button", 0);
-        int button1 = intent.getIntExtra("button1",0);
-        int button2 = intent.getIntExtra("button2",0);
+        double button = intent.getDoubleExtra("button", 0.0);
+        double button1 = intent.getDoubleExtra("button1",0.0);
+        double button2 = intent.getDoubleExtra("button2",0.0);
         double button3 = intent.getDoubleExtra("button3",0.0);
 
 
